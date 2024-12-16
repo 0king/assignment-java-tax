@@ -24,18 +24,14 @@ public class TaxCalculator {
     }
 
     // total tax
-    public void calculateTax(CartItem item) {
+    public float calculateTax(CartItem item) {
         float imported = 0;
         if (item.isImported())
             imported = IMPORT_TAX_RATE * item.getPrice() / 100F;
         float basic = 0;
         if (!exemptions.contains(item.getType()))
             basic = SALES_TAX_RATE * item.getPrice() / 100F;
-
-        // set it
-        item.setTax(basic + imported);
-
-        //return basic + imported;
+        return basic + imported;
     }
 
 }
