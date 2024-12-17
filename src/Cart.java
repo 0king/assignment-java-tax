@@ -3,10 +3,14 @@ import java.util.List;
 
 public class Cart {
     private List<CartItem> items;
+    private int id;
 
-    public Cart() {
+    public Cart(int id) {
+        this.id = id;
         this.items = new ArrayList<>();
     }
+
+    int getId() { return id; }
 
     public List<CartItem> getItems() {
         return items;

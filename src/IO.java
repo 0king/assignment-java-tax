@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class Output {
+public class IO {
 
     public static void print(CartItem item) {
         System.out.print(item.getQuantity() + " ");
@@ -24,11 +24,17 @@ public class Output {
     }
 
     public static void print(List<Cart> carts) {
-        int counter = 1;
         for (Cart c: carts) {
-            System.out.println("\nOutput " + counter++ + ":");
+            System.out.println("\nOutput " + c.getId() + ":");
             print(c);
         }
+    }
+
+    public static void print(String s){
+        System.out.print(s);
+    }
+    public static void println(String s){
+        System.out.println(s);
     }
 
 }

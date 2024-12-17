@@ -1,5 +1,9 @@
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,17 +16,19 @@ public class InputParser {
         calculator = calc;
     }
 
-    //@Nullable
-    List<Cart> parse(File file) throws IOException {
+    @Nullable
+    List<Cart> parse(InputStream is) throws IOException {
         List<Cart> carts = null;
-        Scanner sc = new Scanner(file);
+        Scanner sc = new Scanner(is);
         while (sc.hasNextLine()){
-            String in = sc.nextLine();
-            if(in.startsWith("Input")){
+            String line = sc.nextLine().trim();
+            if (line.isEmpty()) break;
+            if(line.startsWith("Input")){
                 if(carts == null) {
-                   carts = new ArrayList<>();
+                    carts = new ArrayList<>();
                 }
-                Cart cart = new Cart();
+                int id = Integer.parseInt(line.substring(6, line.indexOf(":")));
+                Cart cart = new Cart(id);
                 carts.add(cart);
                 while (sc.hasNextLine()){
                     String s = sc.nextLine();
@@ -36,7 +42,8 @@ public class InputParser {
 
     private static class StringParser {
 
-        static CartItem parse(String s, TaxCalculator calc) {
+        @org.jetbrains.annotations.NotNull
+        static CartItem parse(@NotNull String s, @NotNull TaxCalculator calc) {
             CartItem item = new CartItem();
             item.setQuantity(getQuantity(s));
             item.setImported(isImported(s));

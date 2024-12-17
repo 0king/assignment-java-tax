@@ -9,8 +9,8 @@ public class Main {
 
         InputParser parser = new InputParser(calculator);
         try {
-            List<Cart> carts = parser.parse(new File("src/assets/input-data.txt"));
-            Output.print(carts);
+            List<Cart> carts = parser.parse(System.in);
+            IO.print(carts);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
